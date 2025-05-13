@@ -77,6 +77,15 @@ const addTask=()=>{
    li.textContent = taskValue
 
 
+
+     const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = "❌";
+  deleteBtn.title = "Delete";
+  deleteBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent triggering completion toggle
+    li.remove();
+  });
+
    taksList.appendChild(li)
 }
 
