@@ -56,29 +56,38 @@
 //   taskInput.value = "";
 // }
 
-
-
 //get elements
 
-const taskInput = document.getElementById("task-input")
-const addBtn = document.getElementById("add-task-btn")
-const taksList = document.getElementById("task-list")
+const taskInput = document.getElementById("task-input");
+const addBtn = document.getElementById("add-task-btn");
+const taksList = document.getElementById("task-list");
+const filterBtns = document.querySelectorAll(".filter-btn")
 
 
 
-const addTask=()=>{
-    const taskValue =  taskInput.value.trim()
-   if(taskValue === ""){
-    alert("please Inter task!")
-    return
-   }
+let task = JSON.parse(localStorage.getItem("task")) || []
 
-   const li = document.createElement("li")
-   li.textContent = taskValue
+// window.addEventListener("DOMContentLoaded", renderTasks)
 
+addBtn.addEventListener("click", addTask);
+taskInput.addEventListener("keypress", (e)=>{
+  if(e.key == "Enter") addTask()
+})
+function addTask() {
+  const taskValue = taskInput.value.trim();
+  if (taskValue === "") {
+    alert("please Inter task!");
+    return;
+  }
 
+  const li = document.createElement("li");
+  li.textContent = taskValue;
 
-     const deleteBtn = document.createElement("button");
+  li.addEventListener("click", () => {
+    li.classList.toggle("completed");
+  });
+
+  const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = "❌";
   deleteBtn.title = "Delete";
   deleteBtn.addEventListener("click", (e) => {
@@ -86,8 +95,13 @@ const addTask=()=>{
     li.remove();
   });
 
-   taksList.appendChild(li)
+  const actionsDiv = document.createElement("div");
+  actionsDiv.classList.add("task-actions");
+  actionsDiv.appendChild(deleteBtn);
+
+  li.appendChild(actionsDiv);
+
+  taksList.appendChild(li);
+
+  taskInput.value = "";
 }
-
-
-addBtn.addEventListener("click", addTask)

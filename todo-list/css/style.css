@@ -88,3 +88,28 @@
     font-size: 16px;
   }
   
+
+  /* ✅ NEW: Filter Buttons */
+.filter-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 8px;
+  margin: 0 5px;
+  border: none;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background-color: #4caf50;
+  color: white;
+}
